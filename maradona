@@ -1,0 +1,66 @@
+#!/bin/python3
+
+import time
+import argparse
+
+
+def datetime():
+    struct_time = time.gmtime(time.time())
+    # Trasformations
+    year = struct_time.tm_year - 1960
+    month = struct_time.tm_mon - 9
+    day = struct_time.tm_mday - 29
+    # Exceptions
+    if month < 1:
+        year -= 1
+        month = 12 + month
+    if day < 1:
+        month -= 1
+        if month in [11, 4, 6, 9]:
+            day = 30 + day
+        elif month == 2:
+            day = 28 + day
+        else:
+            day = 31 + day
+    # Int to str + other data
+    month_list = [
+        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ]
+    week = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+    month = month_list[month-1]
+    wday = week[struct_time.tm_wday]
+    hour = struct_time.tm_hour
+    minute = struct_time.tm_min
+    second = struct_time.tm_sec
+    if len(str(hour)) == 1:
+       hour = f"0{hour}"
+    if len(str(minute)) == 1:
+        minute = f"0{minute}"
+    if len(str(second)) == 1:
+        second = f"0{second}"
+    print(f"{wday} {month} {day} {year} {hour}:{minute}:{second} GMT {year}")
+
+
+def maradona_time():
+    zero_maradona_time = -289440000
+    maradona_time = int(time.time()) - zero_maradona_time
+    print(maradona_time)
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        prog="maradona",
+        description="Show Maradona Time (seconds since D10S)"
+    )
+    parser.add_argument(
+        "-d", "--date",
+        action="store_true",
+        help="show datetime (start counting from D10S birth)"
+    )
+    args = parser.parse_args()
+    if args.date:
+        datetime()
+    else:
+        maradona_time()  # default
+
