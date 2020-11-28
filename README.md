@@ -13,6 +13,9 @@ Maradona Time (also known as D10S time and seconds since D10S) is a system for d
 
 ## Usage
 ```
+$ git clone https://github.com/alessiocelentano/maradonatime
+$ cd maradonatime
+$ make
 $ maradona
 1896024903
 $ maradona --date
