@@ -39,7 +39,7 @@ def datetime():
         minute = f"0{minute}"
     if len(str(second)) == 1:
         second = f"0{second}"
-    print(f"{wday} {month} {day} {year} {hour}:{minute}:{second} GMT {year}")
+    print(f"{wday} {month} {day} {hour}:{minute}:{second} GMT {year}")
 
 
 def maradona_time():
